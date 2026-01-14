@@ -1,0 +1,221 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+body {
+  @apply bg-gray-100 text-gray-700;
+  font-family:sans-serif;
+}
+
+h2 {
+  @apply text-xl font-bold my-4;
+}
+h3 {
+  @apply text-lg font-bold my-4;
+}
+ul {
+  @apply my-10;
+}
+p {
+  @apply my-2;
+}
+
+/* header */
+header {
+  @apply bg-white;
+
+  nav {
+    @apply flex flex-nowrap items-center gap-5 max-w-5xl px-12 py-4 mx-auto h-20;
+  }
+  h1 {
+    @apply mr-auto;
+  }
+  input{
+  @apply block w-120 mt-2 mb-4 p-2 border border-gray-300
+         focus:border-blue-500
+         focus:ring-0
+         focus:outline-none
+         rounded
+         
+         ;
+}
+}
+
+/* form elements */
+form {
+  @apply max-w-screen-sm;
+}
+ textarea {
+  @apply block w-full mt-2 mb-4 p-2 bg-white ;
+}
+
+/* custom classes */
+/* Problrm */
+.container { 
+  @apply max-w-5xl mx-auto px-12 py-8;
+}
+.card {
+  @apply bg-white rounded border border-gray-200 px-3 py-3 my-2 flex justify-between items-center;
+}
+.highlight {
+  @apply border-l-4 border-l-red-500;
+}
+.btn {
+  @apply rounded px-3 py-2 bg-gray-200 hover:bg-blue-500 hover:text-white;
+}
+.texttitle{
+    @apply text-2xl font-bold text-blue-500;
+}
+
+.hero-section {
+    background: linear-gradient(to bottom, white, #f9fafb);
+    padding: 64px 0 80px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #6b7280;
+    margin-bottom: 32px;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-container:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.search-input {
+    flex: 1;
+    padding: 20px 16px;
+    font-size: 1.125rem;
+    border: none;
+    outline: none;
+}
+
+.search-button:hover {
+    background: #1d4ed8;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+}
+
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.stat-label {
+    color: #6b7280;
+    margin-top: 4px;
+}
+/* Stats Section */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+}
+
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.stat-label {
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* Category Cards */
+.category-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.category-image {
+    height: 256px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.1);
+}
+
+.category-name {
+    padding: 24px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Category Backgrounds */
+.bg-smartphones {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+
+.bg-laptops {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.bg-headphones {
+    background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
+}
+
+.bg-tablets {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.inpustyle{
+    @apply block w-full mt-2 mb-4 p-2 bg-white;
+}
