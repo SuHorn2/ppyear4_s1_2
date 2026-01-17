@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductCompareController;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,3 +31,4 @@ Route::get('/home', function () {
 Route::get('/search', [ProductCompareController::class, 'index']);
 Route::get('/products/{unique_id}', [ProductCompareController::class, 'show']);
 
+Route::get('/search', [ProductCompareController::class, 'search'])->name('search');

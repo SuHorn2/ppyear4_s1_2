@@ -10,4 +10,12 @@ class Favorite extends Model
         'user_id',
         'product_unique_id'
     ];
+    public function product()
+    {
+        return $this->belongsTo(
+            Product::class,
+            'product_unique_id', 
+            'unique_id'          
+        );
+    }
 }

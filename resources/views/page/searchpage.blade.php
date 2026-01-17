@@ -2,9 +2,9 @@
     <div class="flex items-center justify-between mb-6">
         <div>
             <h1 class="text-2xl font-semibold">
-                Search results for <span class="font-bold">"Smartphones"</span>
+                Search results for <span class="font-bold">"{{ $query }}"</span>
             </h1>
-            <p class="text-sm text-gray-500">12 products found</p>
+            <p class="text-sm text-gray-500 mb-6">{{ count($products) }} products found</p>
         </div>
         <select class="w-fit border rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500">
             <option>Sort by: Relevance</option>

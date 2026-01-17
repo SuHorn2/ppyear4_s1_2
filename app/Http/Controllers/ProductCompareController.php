@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ProductCompareController extends Controller
 {
@@ -147,4 +148,53 @@ class ProductCompareController extends Controller
             'source'   => 'Platzi API',
         ]);
     }
+    public function search(Request $request)
+{
+    $query = strtolower($request->q);
+    $categories = $request->category ?? [];
+    $minPrice = $request->min_price;
+    $maxPrice = $request->max_price;
+
+    $products = collect($this->fetchAllProducts());
+
+    // TEXT SEARCH
+    if ($query) {
+        $products = $products->filter(function ($product) use ($query) {
+            return str_contains(strtolower($product['title']), $query)
+                || str_contains(strtolower($product['category']), $query);
+        });
+    }
+
+    // CATEGORY FILTER
+    if (!empty($categories)) {
+        // ensure $categories is array
+        $categories = is_array($categories) ? $categories : [$categories];
+
+        // case-insensitive match
+        $products = $products->filter(function ($product) use ($categories) {
+            return in_array(strtolower($product['category']), array_map('strtolower', $categories));
+        });
+    }
+
+    // PRICE FILTER
+    if ($minPrice !== null) {
+        $products = $products->filter(fn($p) => $p['price'] >= (float)$minPrice);
+    }
+    if ($maxPrice !== null) {
+        $products = $products->filter(fn($p) => $p['price'] <= (float)$maxPrice);
+    }
+
+    // FAVORITES
+    $userId = Auth::check() ? Auth::id() : null;
+    $savedIds = $userId
+        ? Favorite::where('user_id', $userId)->pluck('product_unique_id')->toArray()
+        : [];
+
+    return view('page.searchpage', [
+        'products' => $products->values(),
+        'savedIds' => $savedIds,
+        'query' => $request->q
+    ]);
+}
+
 }

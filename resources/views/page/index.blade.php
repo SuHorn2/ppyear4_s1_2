@@ -8,17 +8,21 @@
                 <p class="hero-subtitle">
                     Compare prices from hundreds of retailers and save on your next purchase
                 </p>
-                
+            
                 <!-- Search Bar -->
                 <div class="max-w-3xl mx-auto">
-                    <div class="search-container">
-                        <div class="pl-5">
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
+                    <form action="{{ route('search') }}" method="GET">
+                        <div class="search-container">
+                           <input
+                            type="text"
+                            name="q"
+                            placeholder="Search for products..."
+                            class="search-input"
+                            value="{{ request('q') }}"
+                    >
                         </div>
-                        <input type="text" placeholder="Search for products, brands, or models..." class="search-input">
-                    </div>
+                    </form>
+
                 </div>
 
                 <!-- Stats -->
@@ -43,44 +47,34 @@
             </div>
         </div>
     </section>
+    <!-- Browse by Category Section -->
     <section class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="texttitle py-10">Browes by Category</h1>
-            
+            <h1 class="texttitle py-10">Browse by Category</h1>
+
+            @php
+                $categories = [
+                    ['title' => 'Electronics', 'emoji' => '📱', 'bg' => 'bg-smartphones'],
+                    ['title' => 'Clothing', 'emoji' => '👕', 'bg' => 'bg-laptops'],
+                    ['title' => 'Home', 'emoji' => '🏠', 'bg' => 'bg-headphones'],
+                    ['title' => 'Beauty', 'emoji' => '💄', 'bg' => 'bg-tablets'],
+                    ['title' => 'Food', 'emoji' => '🍔', 'bg' => 'bg-tablets'],
+                    ['title' => 'Sports', 'emoji' => '⚽', 'bg' => 'bg-tablets'],
+                    ['title' => 'Books', 'emoji' => '📚', 'bg' => 'bg-tablets'],
+                    ['title' => 'Other', 'emoji' => '🛒', 'bg' => 'bg-tablets'],
+                ];
+            @endphp
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <x-categorycard title="Electronics" background_img="bg-smartphones">
-                    <div>📱</div>
-                </x-categorycard>
-
-                <x-categorycard title="Clothing" background_img="bg-laptops">
-                    <div>👕</div>
-                </x-categorycard>
-
-                <x-categorycard title="Home" background_img="bg-headphones">
-                    <div>🏠</div>
-                </x-categorycard>
-
-                <x-categorycard title="Beauty" background_img="bg-tablets">
-                    <div>💄</div>
-                </x-categorycard>
-
-                <x-categorycard title="Food" background_img="bg-tablets">
-                    <div>🍔</div>
-                </x-categorycard>
-
-                <x-categorycard title="Sports" background_img="bg-tablets">
-                    <div>⚽</div>
-                </x-categorycard>
-
-                <x-categorycard title="Books" background_img="bg-tablets">
-                    <div>📚</div>
-                </x-categorycard>
-
-                <x-categorycard title="Other" background_img="bg-tablets">
-                    <div>🛒</div>
-                </x-categorycard>
-
+                @foreach($categories as $cat)
+                    <x-categorycard 
+                        :title="$cat['title']" 
+                        :background_img="$cat['bg']" 
+                        :href="route('search') . '?category=' . $cat['title']"
+                    >
+                        {{ $cat['emoji'] }}
+                    </x-categorycard>
+                @endforeach
             </div>
         </div>
     </section>
