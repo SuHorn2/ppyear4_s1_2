@@ -20,7 +20,7 @@
                 </a> --}}
                 <h1></h1>
             
-            <input type="text">
+            <input type="text" placeholder="Search for products...">
             @auth
             <a href="{{ route('products.saved') }}">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,14 +36,8 @@
             @endauth
             
             @guest
-                <a href="{{ route('show.login') }}" class="btn">Login</a>
                 <a href="{{ route('show.register') }}" class="btn">Register</a>
             @endguest
-             
-            <form action="{{ route('logout') }}" method="POST" class="m-0">
-                @csrf
-                <button class="btn">LogOut</button>
-            </form> 
 
         </nav>
     </header>

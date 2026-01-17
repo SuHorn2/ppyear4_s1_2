@@ -84,40 +84,39 @@
             </div>
         </div>
     </section>
-    <section class="bg-white h-auto">
-        <h1 class="texttitle py-10" >Trending Products</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
-            <x-cardtrending>
-                <p class="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded">saveing</p>
-                <h2 >title</h2>
-                <p class="text-2xl text-blue-600">price</p>
-                <p>from</p>
-            </x-cardtrending>
-             <x-cardtrending>
-                <p class="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded">saveing</p>
-                <h2 >title</h2>
-                <p class="text-2xl text-blue-600">price</p>
-                <p>from</p>
-            </x-cardtrending>
-             <x-cardtrending>
-                <p class="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded">saveing</p>
-                <h2 >title</h2>
-                <p class="text-2xl text-blue-600">price</p>
-                <p>from</p>
-            </x-cardtrending>
-             <x-cardtrending>
-                <p class="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded">saveing</p>
-                <h2 >title</h2>
-                <p class="text-2xl text-blue-600">price</p>
-                <p>from</p>
-            </x-cardtrending>
-            
+    <footer class="bg-white mt-12 rounded-2xl">
+    <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div>
+            <h2 class=" text-lg font-semibold mb-3">ProductCompare</h2>
+            <p class="text-sm text-gray-400 pt-6">
+                Discover, compare, and save products from multiple online stores in one place.
+            </p>
         </div>
-        
-    </section>
-    <section>
-        <div class="bg-blue-500 w-50 h-100">
-            <h1>blue</h1>
+
+        <div>
+            <h2 class=" font-semibold mb-3">Quick Links</h2>
+            <ul class="space-y-2 text-sm">
+                <li><a href="/home" class="hover:text-blue-500 text-gray-400">Home</a></li>
+                    @auth
+                       <li><a href="/favourite" class="hover:text-blue-500 text-gray-400">Favorites</a></li>
+                        <li><a href="/profile" class="hover:text-blue-500 text-gray-400">Proflie</a></li>
+                    @endauth
+            </ul>
         </div>
-    </section>
+        <div>
+            <h2 class=" font-semibold mb-3">Features & Help </h2>
+            <ul class="space-y-2 text-sm text-gray-400">
+                <li>How it works</li>
+                <li>Save products</li>
+                <li>Compare products</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="border-t border-gray-800 text-center py-4 text-sm text-gray-500">
+        © {{ date('Y') }} ProductCompare. All rights reserved.
+    </div>
+</footer>
+
 </x-layout>
