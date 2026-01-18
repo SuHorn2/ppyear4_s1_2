@@ -32,12 +32,9 @@ Route::middleware('auth')->group(function(){
 Route::get('/home', function () {
     return view('page.index');
 });
-Route::get('/search', [ProductCompareController::class, 'index']);
+Route::get('/search', [ProductCompareController::class, 'search'])
+    ->name('search');
+
 Route::get('/products/{unique_id}', [ProductCompareController::class, 'show']);
 
-<<<<<<< HEAD
-Route::get('/search', [ProductCompareController::class, 'search'])->name('search');
-=======
 
-
->>>>>>> 939bf94226031981682b81c6993a9d62b2aa46e7

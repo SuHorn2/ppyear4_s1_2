@@ -9,37 +9,39 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $query = $request->q;
+        $query    = $request->query;      
+        $sort     = $request->sort;
+        $category = $request->category;
+        $retailer = $request->retailer;
 
         $products = Product::query()
 
             // SEARCH BY TITLE
-            ->when($query, function ($q) use ($query) {
-                $q->where('title', 'LIKE', "%{$query}%");
+            ->when($request->q, function ($q) use ($request) {
+                $q->where('title', 'LIKE', "%{$request->q}%");
             })
 
-            // FILTER BY CATEGORY (single or multiple)
-            ->when($request->category, function ($q) use ($request) {
-                // Convert to array to support checkboxes (multiple) or single string
-                $categories = is_array($request->category) ? $request->category : [$request->category];
-                $q->whereIn('category', $categories);
+            // FILTER BY CATEGORY
+            ->when($category, function ($q) use ($category) {
+                $q->where('category', $category);
             })
 
-            //MIN PRICE
-            ->when($request->min_price, function ($q) use ($request) {
-                $q->where('price', '>=', $request->min_price);
+            // FILTER BY RETAILER
+            ->when($retailer, function ($q) use ($retailer) {
+                $q->where('source', $retailer); 
             })
 
-            //MAX PRICE
-            ->when($request->max_price, function ($q) use ($request) {
-                $q->where('price', '<=', $request->max_price);
-            })
+            // SORT
+            ->when($sort === 'price_asc', fn($q) => $q->orderBy('price', 'asc'))
+            ->when($sort === 'price_desc', fn($q) => $q->orderBy('price', 'desc'))
 
             ->get();
 
         return view('page.searchpage', [
             'products' => $products,
             'query' => $query,
+            'selectedCategory' => $category,
+            'selectedRetailer' => $retailer,
             'savedIds' => auth()->check()
                 ? auth()->user()->favorites()->pluck('product_unique_id')->toArray()
                 : []

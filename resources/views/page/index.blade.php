@@ -70,7 +70,7 @@
                     <x-categorycard 
                         :title="$cat['title']" 
                         :background_img="$cat['bg']" 
-                        :href="route('search') . '?category=' . $cat['title']"
+                        :href="route('search', ['q' => request('q'), 'category' => $cat['title']])"
                     >
                         {{ $cat['emoji'] }}
                     </x-categorycard>
